@@ -1017,16 +1017,31 @@ def calculateAllWrap(dimensionString)
   return total
 end
 
+def calculateRibbon(l,w,h)
+  sortedDimensions = [l,w,h].sort
+  return sortedDimensions[0]*2 + sortedDimensions[1]*2 + l*w*h
+end
+
+def calculateAllRibbon(dimensionString)
+  dimensionArray = splitDimensions(dimensionString)
+  total = 0
+  dimensionArray.each do |value|
+    dimensions = value.split("x")
+    total += calculateRibbon(dimensions[0].to_i, dimensions[1].to_i, dimensions[2].to_i)
+  end
+  return total
+end
+
 TEST1 = "2x3x4"
 TEST2 = "1x1x10"
 TEST3 = "2x3x4
 1x1x10"
 
 
-print calculateAllWrap(TEST1)
+print calculateAllRibbon(TEST1)
 print "\n"
-print calculateAllWrap(TEST2)
+print calculateAllRibbon(TEST2)
 print "\n"
-print calculateAllWrap(TEST3)
+print calculateAllRibbon(TEST3)
 print "\n"
-print calculateAllWrap(INPUT)
+print calculateAllRibbon(INPUT)
