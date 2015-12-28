@@ -18,14 +18,31 @@ def findPositionAt(instructions, position)
   return i
 end
 
-TEST1 = ")"
-
-TEST2 = "()())"
-
+#Part 1
 print countFloors(INPUT)
 print "\n"
-print findPositionAt(INPUT, -1)
+
+#Part 2
+print findPositionAt(INPUT, -1) 
 print "\n"
-print findPositionAt(TEST1, -1)
-print "\n"
-print findPositionAt(TEST2, -1)
+
+#TESTS
+#TEST1 = "(())"
+#TEST2 = "(()(()("
+#TEST3 = "))((((("
+#TEST4 = ")())())"
+#TEST5 = ")"
+#TEST6 = "()())"
+
+#print countFloors(TEST1) #####floor 0
+#print "\n"
+#print countFloors(TEST2) #####floor 3
+#print "\n"
+#print countFloors(TEST3) #####floor 3
+#print "\n"
+#print countFloors(TEST4) #####floor -3
+#print "\n"
+#print findPositionAt(TEST5, -1) ######position 1
+#print "\n"
+#print findPositionAt(TEST6, -1) ######position 5
+#print "\n"

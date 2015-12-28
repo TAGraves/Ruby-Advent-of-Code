@@ -1032,16 +1032,30 @@ def calculateAllRibbon(dimensionString)
   return total
 end
 
-TEST1 = "2x3x4"
-TEST2 = "1x1x10"
-TEST3 = "2x3x4
-1x1x10"
+#Part 1
+print calculateAllWrap(INPUT)
+print "\n"
 
-
-print calculateAllRibbon(TEST1)
-print "\n"
-print calculateAllRibbon(TEST2)
-print "\n"
-print calculateAllRibbon(TEST3)
-print "\n"
+#Part 2
 print calculateAllRibbon(INPUT)
+print "\n"
+
+#TESTS
+#TEST1 = "2x3x4"
+#TEST2 = "1x1x10"
+#TEST3 = "2x3x4
+#1x1x10"
+
+#print calculateAllWrap(TEST1) #####58 sq ft
+#print "\n"
+#print calculateAllWrap(TEST2) #####43 sq ft
+#print "\n"
+#print calculateAllWrap(TEST3) #####101 sq ft
+#print "\n"
+
+#print calculateAllRibbon(TEST1) #####34 sq ft
+#print "\n"
+#print calculateAllRibbon(TEST2) #####14 sq ft
+#print "\n"
+#print calculateAllRibbon(TEST3) #####48 sq ft
+#print "\n"
