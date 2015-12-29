@@ -1007,26 +1007,47 @@ def is_nice(str)
   end
 end
 
+def is_nice2(str)
+  if str.match(/(.{2})(?=.*\1)/) && str.match(/(.)(?=.{1}\1)/)
+    return true
+  else
+    return false
+  end
+end
+
 def count_nice(input)
   count = 0
   for str in input
-    if is_nice(str)
+    if is_nice2(str)
       count += 1
     end
   end
   return count
 end
 
+
 puts count_nice(INPUT)
-  
+
+
 #TEST1 = "ugknbfddgicrmopn"
 #TEST2 = "aaa"
 #TEST3 = "jchzalrnumimnmhp"
 #TEST4 = "haegwjzuvuyypxyu"
 #TEST5 = "dvszwmarrgswjxmb"
+#TEST6 = "qjhvhtzxzqqjkmpb"
+#TEST7 = "xxyxx"
+#TEST8 = "uurcxstgmygtbstg"
+#TEST9 = "ieodomkazucvgmuy"
+#TEST10 = "aaa"
+
 
 #puts is_nice(TEST1)
 #puts is_nice(TEST2)
 #puts is_nice(TEST3)
 #puts is_nice(TEST4)
 #puts is_nice(TEST5)
+#puts is_nice2(TEST6)
+#puts is_nice2(TEST7)
+#puts is_nice2(TEST8)
+#puts is_nice2(TEST9)
+#puts is_nice2(TEST10)
