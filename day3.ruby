@@ -27,16 +27,44 @@ def parseDirections(directions) #take a direction string and deliver according t
   return deliveryRecord
 end
 
+def parseRoboDirections(directions) #take a direction string and deliver according to it - with robot santa!
+  santaLocation = [0,0] #[x axis, y axis] - stores Santa's current location
+  roboLocation = [0,0] #stores robo-Santa's current location
+  deliveryRecord = {santaLocation.clone => 2} #stores how many deliveries we've made to each location
+  for i in 0..directions.length - 1 #process each direction -- with an index this time!
+    direction = directions[i]
+    if i % 2 == 0
+      deliverer = roboLocation
+    else
+      deliverer = santaLocation
+    end
+    case direction
+      when ">" #right
+        deliverer[0] += 1
+      when "<" #left
+        deliverer[0] += -1        
+      when "^" #up
+        deliverer[1] += 1
+      when "v" #down
+        deliverer[1] -= 1
+    end
+    deliver(deliverer, deliveryRecord)
+  end
+  return deliveryRecord
+
+end
 def countHouses(record)
   return record.length
 end
 
 puts countHouses(parseDirections(INPUT))
 
-#TEST1 = ">"
+puts countHouses(parseRoboDirections(INPUT))
+
+#TEST1 = "^v"
 #TEST2 = "^>v<"
 #TEST3 = "^v^v^v^v^v"
 
-#puts countHouses(parseDirections(TEST1))
-#puts countHouses(parseDirections(TEST2))
-#puts countHouses(parseDirections(TEST3))
+#puts countHouses(parseRoboDirections(TEST1))
+#puts countHouses(parseRoboDirections(TEST2))
+#puts countHouses(parseRoboDirections(TEST3))
