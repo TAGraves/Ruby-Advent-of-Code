@@ -4,7 +4,7 @@ INPUT = "ckczppom"
 
 def checkMD5Hash(input)
   md5 = Digest::MD5.hexdigest(input)
-  if md5[0..4] == "00000"
+  if md5[0..5] == "000000" #five zeroes for part one, six for part two
     return true
   else
     return false
