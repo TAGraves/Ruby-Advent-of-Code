@@ -30,7 +30,7 @@ def calc_shortest_route(data)
   distances = make_place_hash(data)
   places = make_place_map(distances)
   shortest_route = 0
-  routes = places.permutation.to_a
+  routes = get_permutations(places)
   routes.each do |route|
     i = 0
     routeLength = 0
@@ -49,7 +49,7 @@ def calc_longest_route(data)
   distances = make_place_hash(data)
   places = make_place_map(distances)
   longest_route = 0
-  routes = places.permutation.to_a
+  routes = get_permutations(places)
   routes.each do |route|
     i = 0
     routeLength = 0
@@ -64,6 +64,32 @@ def calc_longest_route(data)
   return longest_route
 end
 
+def get_permutations(places)
+  routes = []
+  i = 0
+  while i < places.length
+    route = [places[i]]
+    next_permutation(places, 1, routes, route)
+    i += 1
+  end
+  return routes
+end
+
+def next_permutation(places, level, routes, route)
+  i = 0
+  if level < places.length
+    while i < places.length
+      if !route.include?(places[i])
+        permutationRoute = route.clone
+        permutationRoute.push(places[i])
+        next_permutation(places, level+1, routes, permutationRoute)
+      end
+      i += 1
+    end
+  else
+    routes.push(route)
+  end
+end
 
 INPUT = ("AlphaCentauri to Snowdin = 66
 AlphaCentauri to Tambi = 28
