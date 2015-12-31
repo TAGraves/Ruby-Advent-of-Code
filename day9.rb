@@ -40,10 +40,28 @@ def calc_shortest_route(data)
     end
     if shortest_route == 0 || routeLength < shortest_route
       shortest_route = routeLength
-      puts route
     end
   end
   return shortest_route
+end
+
+def calc_longest_route(data)
+  distances = make_place_hash(data)
+  places = make_place_map(distances)
+  longest_route = 0
+  routes = places.permutation.to_a
+  routes.each do |route|
+    i = 0
+    routeLength = 0
+    while i < route.length-1 do
+      routeLength += distances[route[i]][route[i+1]]
+      i += 1
+    end
+    if routeLength > longest_route
+      longest_route = routeLength
+    end
+  end
+  return longest_route
 end
 
 
@@ -80,4 +98,4 @@ TEST1 = ("London to Dublin = 464
 London to Belfast = 518
 Dublin to Belfast = 141").split("\n")
 
-puts calc_shortest_route(INPUT)
+puts calc_longest_route(INPUT)
