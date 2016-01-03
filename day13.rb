@@ -24,6 +24,18 @@ def make_people_hash(data)
   return peopleHash
 end
 
+def add_self_to_hash(peopleHash)
+  me = 'Me'
+  peopleHash[me] = {}
+  peopleHash.each_key do |person|
+    if person != me
+      peopleHash[person][me] = 0
+      peopleHash[me][person] = 0
+    end
+  end
+  return peopleHash
+end
+
 def calc_greatest_happiness(data)
   table = make_people_hash(data)
   people = make_people_map(table)
@@ -45,6 +57,31 @@ def calc_greatest_happiness(data)
   end
   return most_happiness
 end
+
+def calc_greatest_happiness_with_self(data)
+  table = make_people_hash(data)
+  table = add_self_to_hash(table)
+  people = make_people_map(table)
+  most_happiness = 0
+  seatings = get_permutations(people)
+  seatings.each do |seating|
+    i = 0
+    seatingHappiness = 0
+    while i < seating.length-1 do
+      seatingHappiness += table[seating[i]][seating[i+1]]
+      seatingHappiness += table[seating[i+1]][seating[i]]
+      i += 1
+    end
+    seatingHappiness += table[seating[0]][seating[-1]]
+    seatingHappiness += table[seating[-1]][seating[0]]
+    if seatingHappiness > most_happiness
+      most_happiness = seatingHappiness
+    end
+  end
+  
+  return most_happiness
+end
+
 
 def get_permutations(people)
   seatings = []
@@ -143,4 +180,4 @@ David would gain 46 happiness units by sitting next to Alice.
 David would lose 7 happiness units by sitting next to Bob.
 David would gain 41 happiness units by sitting next to Carol.'.split("\n")
 
-puts calc_greatest_happiness(INPUT)
+puts calc_greatest_happiness_with_self(INPUT)
