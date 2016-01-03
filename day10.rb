@@ -1,4 +1,4 @@
-def look_and_see(num)
+def look_and_say(num)
   numString = num.to_s
   lastNum = ""
   output = ""
@@ -26,10 +26,12 @@ def look_and_see(num)
 end
 
 def iterate_looks(input, iterations)
-  i = 0
-  while i < iterations do
-    input = look_and_see(input)
-    i += 1
+  iterations.times do |i|
+    input = look_and_say(input)
+    print i
+    print ": "
+    print input.length
+    print "\n"
   end
   return input
 end
@@ -38,4 +40,4 @@ INPUT = 1113222113
 
 TEST1 = 1
 
-puts iterate_looks(INPUT, 40).length
+puts iterate_looks(INPUT, 50).length
