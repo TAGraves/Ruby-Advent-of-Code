@@ -9,4 +9,54 @@ def add_numbers(input)
   return total
 end
 
-puts add_numbers(INPUT)
+def process_hash(hash)
+  if hash.value?('red')
+    return 0
+  else
+    total = 0
+    hash.each_value do |entry|
+      if entry.is_a? Hash
+        total += process_hash(entry)
+      elsif entry.is_a? Array
+        total += process_array(entry)
+      else
+        total += entry.to_i
+      end
+    end
+    return total
+  end
+end
+
+def process_array(array)
+  total = 0
+  array.each do |entry|
+    if entry.is_a? Hash
+      total += process_hash(entry)
+    elsif entry.is_a? Array
+      total += process_array(entry)
+    else
+      total += entry.to_i
+    end
+  end
+  return total
+end
+
+def add_non_red(input)
+  total = 0
+  input.each do |entry|
+    if entry.is_a? Hash
+      total += process_hash(entry)
+    else
+      total += process_array(entry)
+    end
+  end
+  return total
+end
+
+def parse_json(input)
+  require 'json'
+  return JSON.parse(input)
+end
+
+#puts add_numbers(INPUT)
+puts add_non_red(parse_json(INPUT))
