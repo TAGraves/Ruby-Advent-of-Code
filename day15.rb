@@ -34,6 +34,14 @@ def calculate_total(ingredients, permutation)
   return total
 end
 
+def calculate_calories(ingredients, permutation)
+  calories = 0
+  ingredients.each do |name, ingredient|
+    calories += permutation[name] * ingredient['calories']
+  end
+  return calories
+end
+
 def get_permutations(ingredients)
   keys = ingredients.keys
   permutations = []
@@ -65,8 +73,24 @@ def find_best_cookie(input)
   bestP = {}
   permutations.each do |permutation|
     total = calculate_total(ingredients, permutation)
-    
     if total > best
+      best = total
+      bestP = permutation
+    end
+  end
+  return best
+end
+
+def find_best_healthy_cookie(input)
+  ingredients = parse_input(input)
+  permutations = get_permutations(ingredients)
+  best = 0
+  bestP = {}
+  permutations.each do |permutation|
+    total = calculate_total(ingredients, permutation)
+    calorieCount = calculate_calories(ingredients, permutation)
+
+    if total > best && calorieCount == 500
       best = total
       bestP = permutation
     end
@@ -82,4 +106,4 @@ Chocolate: capacity 0, durability 0, flavor -2, texture 2, calories 8".split("\n
 TEST1 = "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
 Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3".split("\n")
 
-puts find_best_cookie(INPUT)
+puts find_best_healthy_cookie(INPUT)
