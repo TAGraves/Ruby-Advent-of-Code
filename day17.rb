@@ -8,8 +8,13 @@ def try_containers(containers)
         count += 1
       end
     end
+    ##Part 2 here
+    if count > 0
+      return count
+    end
+    ##End Part 2
   end
-  return count
+  #return count ##Part 1
 end
 
 CONTAINERS = "11
