@@ -30,12 +30,33 @@ def check_aunt(aunt, qualities)
   return true
 end
 
+def check_aunt_range(aunt, qualities)
+  aunt.each do |characteristic, value|
+    case characteristic
+    when "cats", "trees"
+      if value <= qualities[characteristic]
+        return false
+      end
+    when "pomeranians", "goldfish"
+      if value >= qualities[characteristic]
+        return false
+      end
+    else
+      if characteristic != "num" && value != qualities[characteristic]
+        return false
+      end
+    end
+  end
+  return true
+end
+
 def find_aunt(mfc, input)
   qualities = parse_machine(mfc)
   aunts = parse_aunts(input)
   
   aunts.each do |aunt|
-    if check_aunt(aunt, qualities)
+    if check_aunt_range(aunt, qualities)
+    #if check_aunt(aunt, qualities)
       return aunt['num']
     end
   end
