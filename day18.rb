@@ -103,6 +103,10 @@ def make_light_grid(input)
 end
 
 def update_lights(grid)
+  grid[0][0].turnOn()
+  grid[grid.length-1][0].turnOn()
+  grid[0][grid[0].length-1].turnOn()
+  grid[grid.length-1][grid[0].length-1].turnOn()
   oldGrid = Marshal.load( Marshal.dump(grid) ) #make a deep copy of grid
   grid.each do |row|
     row.each do |light|
@@ -121,6 +125,11 @@ def update_lights(grid)
       if light.on && count != 2 && count != 3
         light.turnOff()
       elsif count == 3
+        light.turnOn()
+      end
+      
+      #PART 2
+      if (light.row == 0 || light.row == grid.length-1) && (light.column == 0 || light.column == grid[0].length-1)
         light.turnOn()
       end
     end
@@ -236,9 +245,9 @@ TEST1 = ".#.#.#
 #.#..#
 ####..".split("\n")
 
-grid = make_light_grid(INPUT)
+grid = make_light_grid(TEST1)
 
-100.times do |i|
+5.times do |i|
   grid = update_lights(grid)
 end
 
